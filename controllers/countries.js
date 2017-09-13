@@ -9,7 +9,7 @@ MongoClient.connect('mongodb://localhost:27017/country', function(err, database)
     if (err) return;
     db = database;
 });
-
+// this is really /api/countries/
 countriesRouter.get('/', function(req, res) {
     db.collection('countries').find().toArray(function(err, results){
        console.log(db.collection('countries').find());
@@ -33,6 +33,7 @@ countriesRouter.post('/', function(req, res){
         //res.redirect('/api/animals');
         res.json(response);
     })
+    
 })
 
 

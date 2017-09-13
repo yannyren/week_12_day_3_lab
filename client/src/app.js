@@ -4,7 +4,7 @@ var CountryView = require('./views/country_view.js');
 var app = function(){
     var countryData = new AjaxRequest('https://restcountries.eu/rest/v2');
     var countryView = new CountryView(countryData);
-    countryData.get(countryView.render);
+    countryData.get(countryView.render.bind(countryView));
     localStorage.setItem("myCountries", JSON.stringify(countryData));
 }
 
