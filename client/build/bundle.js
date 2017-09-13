@@ -71,13 +71,10 @@ var AjaxRequest = __webpack_require__(1);
 var CountryView = __webpack_require__(2);
 
 var app = function(){
-
-var countryData = new AjaxRequest('https://restcountries.eu/rest/v2');
-var countryView = new CountryView(countryData);
-countryData.get(countryView.render);
-
-// var button = 
-
+    var countryData = new AjaxRequest('https://restcountries.eu/rest/v2');
+    var countryView = new CountryView(countryData);
+    countryData.get(countryView.render);
+    localStorage.setItem("myCountries", JSON.stringify(countryData));
 }
 
 
@@ -140,20 +137,19 @@ var CountryView = function() {
       data.forEach(function(country, index) {
         var option = document.createElement('option');
         option.text = country.name;
-        option.value = index;
+        option.value = country.name;
         selection.appendChild(option);
       })
   }
 
   CountryView.prototype.processCLick = function(){
     var countrySelected = document.getElementById('selection');
-    var selectedValue = countrySelected.options[countrySelected.selectedIndex].text;
+    // var selectedValue = countrySelected.options[countrySelected.selectedIndex].text;
+
     var ul = document.getElementById("bucket-list-countries");
     var li = document.createElement("li")
-    li.innerText = selectedValue;
-    ul.appendChild(li)
-
-    
+    li.innerText = countrySelected.value;
+    ul.appendChild(li);
   }
     
   module.exports = CountryView;
